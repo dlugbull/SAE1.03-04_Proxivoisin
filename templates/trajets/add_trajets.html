@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter un trajet</title>
+{% endblock %}
+
+{% block body %}
+    <form method="post" action="/trajets/add">
+        <fieldset>
+            <legend>Ajouter un trajet</legend>
+            <label for="date">date</label><br>
+            <input class="form-select" id="date" type="date" name="date" size="18" value="" placeholder="Saisir la date du trajet" required><br>
+            <label for="conducteur">conducteur</label>
+            <select class="form-select" name="conducteur" required>
+                <option value=""></option>
+                {% for conducteur in conducteurs %}
+                    <option value="{{ conducteur.id }}"> {{ conducteur.conducteur }} </option>
+                {% endfor %}
+            </select><br>
+            <label for="distance">distance</label><br>
+            <input class="form-select" id="distance" type="text" name="distance" size="18" value="" placeholder="Saisir la distance du trajet"><br>
+            <label for="temps_estime">temps estime</label><br>
+            <input class="form-select" id="temps_estime" type="text" name="temps_estime" size="18" value="" placeholder="Saisir la date du trajet"><br>
+            <label for="nb_places">nombre de places</label><br>
+            <input class="form-select" id="nb_places" type="number" name="nb_places" size="18" value="" placeholder="Saisir le nombre de place"><br>
+            <label for="heure">heure de départ (hh:mm:ss)</label><br>
+            <input class="form-select" id="heure" type="text" name="heure" size="18" value="" placeholder="Saisir l'heure de départ"><br>
+
+            <label for="voiture">voiture</label>
+            <select class="form-select yellow" name="voiture" required>
+                <option value=""></option>
+                {% for voiture in voitures %}
+                    <option value="{{ voiture.immatriculation }}"> {{ voiture.voiture }} </option>
+                {% endfor %}
+            </select><br>
+
+            <label for="depart">lieu de départ</label>
+            <select class="form-select yellow" name="depart" required>
+                <option value=""></option>
+                {% for lieu in lieux %}
+                    <option value="{{ lieu.id }}"> {{ lieu.adresse }} </option>
+                {% endfor %}
+            </select><br>
+
+            <label for="arrivee">lieu d'arrivee</label>
+            <select class="form-select yellow" name="arrivee" required>
+                <option value=""></option>
+                {% for lieu in lieux %}
+                    <option value="{{ lieu.id }}"> {{ lieu.adresse }} </option>
+                {% endfor %}
+            </select><br>
+
+            <input class="btn btn-primary" type="submit" value="Ajouter" name="Valider" >
+
+        </fieldset>
+    </form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>modifier un lieu</title>
+{% endblock %}
+
+{% block body %}
+    <h2>modifier un lieu</h2>
+
+    <form method="post" action="/lieu/edit">
+        <fieldset>
+            <legend> Modifier un lieu</legend>
+            <input class="form-select" id="id" type="text" name="id" size="18" value="{{ lieu.id }}" placeholder="Saisir l'id du lieu" hidden="hidden"><br>
+            <label for="nom">nom</label><br>
+            <input class="form-select" id="nom" type="text" name="nom" size="18" value="{{ lieu.nom }}" placeholder="Saisir la date du trajet" required><br>
+            <select class="form-select" name="ville">
+                {% for ville in villes %}
+                    <option value="{{ ville.id }}"
+                            {% if lieu.ville_id is defined and ville.id_ville ==  ville.ville_id %}selected{% endif %}
+                    > {{ ville.ville }} </option>
+                {% endfor %}
+            </select><br>
+            <label for="adresse">adresse</label><br>
+            <input class="form-select" id="adresse" type="text" name="adresse" size="18" value="{{ lieu.adresse }}" placeholder="Saisir l'adresse du lieu"><br>
+            <label for="altitude">altitude</label><br>
+            <input class="form-select" id="altitude" type="number" name="altitude" size="18" value="{{ lieu.altitude }}" placeholder="Saisir la date du trajet"><br>
+            <label for="capacite_parking">capacité du parking</label><br>
+            <input class="form-select" id="capacite_parking" type="number" name="capacite_parking" size="18" value="{{ lieu.capacite_parking }}" placeholder="Saisir la capacité du parking"><br>
+            <label for="cout_stationnement">coût du stationnement (pour une heure)</label><br>
+            <input class="form-select" id="cout_stationnement" type="number" name="cout_stationnement" size="18" value="{{ lieu.cout_stationnement }}" placeholder="Saisir le coût du stationnement'"><br>
+            <label for="places_PMR">Nombre de places PMR</label><br>
+            <input class="form-select" id="places_PMR" type="number" name="places_PMR" size="18" value="{{ lieu.place_PMR }}" placeholder="Saisir le nombre de places PMR'"><br>
+
+
+            <input class="btn btn-primary" type="submit" value="Modifier" name="Valider" >
+
+        </fieldset>
+    </form>
+{% endblock %}

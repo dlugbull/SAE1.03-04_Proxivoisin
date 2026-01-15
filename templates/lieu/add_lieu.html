@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter un lieu</title>
+{% endblock %}
+
+{% block body %}
+    <form method="post" action="/lieu/add">
+        <fieldset>
+            <legend>Ajouter un lieu</legend>
+            <label for="nom">nom</label><br>
+            <input class="form-select" id="nom" type="text" name="nom" size="18" value="" placeholder="Saisir le nom du lieu" required><br>
+
+            <label for="ville">Ville</label>
+            <select class="form-select" name="ville" id="ville" required>
+                <option value="">-- Sélectionnez une ville --</option>
+                {% for ville in villes %}
+                    <option value="{{ ville.id }}">
+                        {{ ville.nom }}
+                    </option>
+                {% endfor %}
+            </select><br>
+
+            <label for="adresse">adresse</label><br>
+            <input class="form-select" id="adresse" type="text" name="adresse" size="18" value="" placeholder="Saisir l'adresse du lieu"><br>
+            <label for="altitude">altitude</label><br>
+            <input class="form-select" id="altitude" type="number" name="altitude" size="18" value="" placeholder="Saisir la date du trajet"><br>
+            <label for="capacite_parking">capacité du parking</label><br>
+            <input class="form-select" id="capacite_parking" type="number" name="capacite_parking" size="18" value="" placeholder="Saisir la capacité du parking"><br>
+            <label for="cout_stationnement">coût du stationnement (pour une heure)</label><br>
+            <input class="form-select" id="cout_stationnement" type="text" name="cout_stationnement" size="18" value="" placeholder="Saisir le coût du stationnement'"><br>
+            <label for="places_PMR">Nombre de places PMR</label><br>
+            <input class="form-select" id="places_PMR" type="number" name="places_PMR" size="18" value="" placeholder="Saisir le nombre de places PMR'"><br>
+
+
+            <input class="btn btn-primary" type="submit" value="Modifier" name="Valider" >
+
+        </fieldset>
+    </form>
+{% endblock %}

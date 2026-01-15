@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier une voiture</title>
+{% endblock %}
+
+{% block body %}
+    <form method="post" action="/voiture/edit">
+        <fieldset>
+            <legend>Modifier une voiture</legend>
+            <label>Immatriculation</label>
+            <input type="text" name="id" value="{{ voiture.id }}" required>
+
+            <label>Couleur :</label>
+            <input type="text" name="couleur" value="{{ voiture.couleur }}" class="form-control"><br>
+
+            <label>Numéro assurance :</label>
+            <input type="text" name="numero_assurance" value="{{ voiture.numero_assurance }}" class="form-control" required><br>
+
+            <label>Coût assurance :</label>
+            <input type="number" step="0.01" name="cout_assurance" value="{{ voiture.cout_assurance }}" class="form-control"><br>
+
+            <label>Date dernière révision :</label>
+            <input type="date" name="date_derniere_revision" value="{{ voiture.date_derniere_revision }}" class="form-control"><br>
+
+            <label>Statut :</label><br>
+            <select class="form-select" name="statut">
+                <option value="active" {% if voiture.statut =='active' %}selected{% endif %}>Active</option>
+                <option value="en entretien" {% if voiture.statut =='en entretien' %}selected{% endif %}>En entretien</option>
+                <option value="hors service" {% if voiture.statut =='hors service' %}selected{% endif %}>Hors service</option>
+                <option value="en pause" {% if voiture.statut =='en pause' %}selected{% endif %}>En pause</option>
+            </select><br>
+
+            <label>Modèle :</label>
+            <select class="form-select" name="modele" required>
+                {% for m in modeles %}
+                    <option value="{{ m.id_modele }}" {% if m.id_modele == voiture.modele_id %}selected{% endif %}>
+                        {{ m.nom_modele }}
+                    </option>
+                {% endfor %}
+            </select><br>
+
+            <label>Type de carburant :</label>
+            <input type="text" name="type_carburant" value="{{ voiture.type_carburant }}" class="form-control"><br>
+
+            <label>Kilométrage :</label>
+            <input type="number" name="kilometrage" value="{{ voiture.kilometrage }}" class="form-control"><br>
+
+            <label>Nombre de places :</label>
+            <input type="number" name="nombre_places" value="{{ voiture.nombre_places }}" class="form-control"><br>
+
+            <label>Disponibilité :</label>
+            <select class="form-select" name="disponibilite">
+                <option value="1" {% if voiture.disponibilite == 1 %}selected{% endif %}>Disponible</option>
+                <option value="0" {% if voiture.disponibilite == 0 %}selected{% endif %}>Indisponible</option>
+            </select><br>
+
+            <label>Type de véhicule :</label>
+            <select class="form-select" name="type_id" required>
+                {% for t in types %}
+                    <option value="{{ t.id_type }}" {% if t.id_type == voiture.type_id %}selected{% endif %}>
+                        {{ t.nom_type_voiture }}
+                    </option>
+                {% endfor %}
+            </select><br>
+
+            <label>Propriétaire : </label>
+            <select class="form-select" name="personne_id" required>
+                {% for p in personnes %}
+                    <option value="{{ p.id_personne }}" {% if p.personne_id == voiture.personne_id %}selected{% endif %}>
+                        {{ p.nom_personne }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <input class="btn btn-primary" type="submit" value="Modifier">
+        </fieldset>
+    </form>
+{% endblock %}

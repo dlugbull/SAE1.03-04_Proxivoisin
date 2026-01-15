@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher l'Etat des lieux</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Etat des lieux (Cristiano)</h1>
+    <br><br>
+
+    <h3>Les lieux et leurs trajets</h3>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Lieu</th><th>Trajets associé</th><th>Place de parking (PMR / non PMR)</th><th>Ville</th><th>distance moyenne (km)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if lieux | length >= 1 %}
+            {% for ligne in lieux %}
+                <tr>
+                    <td>{{ ligne.lieu }}</td>
+                    <td>{{ ligne.trajetAssocie }}</td>
+                    <td>{{ ligne.capacite }} ({{ ligne.place_PMR }}/{{ ligne.places_non_PMR }})</td>
+                    <td>{{ ligne.ville }}</td>
+                    <td>{{ ligne.distance_moyenne }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de lieu
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    <br><br>
+    <h3>Total des lieux et trajets</h3>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Nombre de lieux</th><th>Tout les trajets avec ces lieux</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if total | length >= 1 %}
+            <tr>
+                <td>{{ total.nombre_lieu }}</td>
+                <td>{{ total.trajet }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>
+                    pas de trajet
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    <br><br>
+    <h3>lieux bon plan</h3>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>rentabilité</th><th>nom</th><th>adresse</th><th>altitude (en mètres)</th><th>cout du stationnement</th><th>Trajets associé</th><th>Place de parking (PMR / non PMR)</th><th>Ville</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if cout | length >= 1 %}
+            {% for ligne in cout %}
+                <tr>
+                    <td>{{ ligne.rentabilite }}</td>
+                    <td>{{ ligne.nom }}</td>
+                    <td>{{ ligne.adresse }}</td>
+                    <td>{{ ligne.altitude }}</td>
+                    <td>{{ ligne.cout_stationnement }}</td>
+                    <td>{{ ligne.trajetAssocie }}</td>
+                    <td>{{ ligne.capacite }} ({{ ligne.place_PMR }}/{{ ligne.places_non_PMR }})</td>
+                    <td>{{ ligne.ville }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de trajet
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

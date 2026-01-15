@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les trajets</title>
+{% endblock %}
+
+{% block body %}
+    <h3>Trajets</h3>
+    <a class="btn btn-success" href="/trajets/add">Ajouter un trajet</a>
+    <a class="btn btn-success" href="/trajets/etat">Etat des trajets</a>
+    <br><br>
+
+    <form method="POST" action="/trajets/search">
+        <fieldset>
+            <legend>Rechercher des trajets</legend>
+
+            <label for="nb_place">Nombre de places minimum</label><br>
+            <input class="form-select" type="number" name="nb_place" id="nb_place" placeholder="Rentrer un nombre de places minimum"><br>
+
+            <label for="depart">Lieu de départ</label><br>
+            <select class="form-select" name="depart" id="depart">
+                <option value=""></option>
+                {% for lieu in lieux %}
+                    <option value="{{ lieu.id }}"> {{ lieu.adresse }} </option>
+                {% endfor %}
+            </select><br>
+
+            <label for="arrivee">Lieu d'arrivée</label><br>
+            <select class="form-select" name="arrivee" id="arrivee">
+                <option value=""></option>
+                {% for lieu in lieux %}
+                    <option value="{{ lieu.id }}"> {{ lieu.adresse }} </option>
+                {% endfor %}
+            </select><br>
+
+            <label for="date">Trajets entre aujourd'hui et une date future</label><br>
+            <input class="form-select" type="date" name="date" id="date" placeholder="Date maximale des trajets"><br>
+
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </fieldset>
+    </form>
+
+
+
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>id</th><th>Conducteur</th><th>date</th><th>distance</th><th>temps_estime</th><th>nb_places</th><th>heure</th><th>immatriculation</th><th>marque</th><th>modele</th><th>depart</th><th>destination</th><th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if trajets | length >= 1 %}
+            {% for trajet in trajets %}
+                <tr>
+                    <td>{{ trajet.id }}</td>
+                    <td>{{ trajet.conducteur }}</td>
+                    <td>{{ trajet.date }}</td>
+                    <td>{{ trajet.distance }}</td>
+                    <td>{{ trajet.temps_estime }}</td>
+                    <td>{{ trajet.nb_places }}</td>
+                    <td>{{ trajet.heure }}</td>
+                    <td>{{ trajet.immatriculation }}</td>
+                    <td>{{ trajet.marque }}</td>
+                    <td>{{ trajet.modele }}</td>
+                    <td>{{ trajet.depart }}</td>
+                    <td>{{ trajet.destination }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="/trajets/edit?id={{ trajet.id }}">Editer</a>&nbsp;
+                        <a class="btn btn-danger" href="/trajets/delete?id={{ trajet.id }}" >Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de trajet
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
+

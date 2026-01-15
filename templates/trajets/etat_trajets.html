@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% block title %}
+    <title>Etat des trajets</title>
+{% endblock %}
+{% block body %}
+    <h3>Etat des trajets (Damien)</h3>
+    <br><br>
+
+    <h4>Répartition des trajets par sexe du conducteur</h4>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Sexe conducteur</th><th>Nombre de trajets</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if trajets_sexe | length >=1 %}
+            {% for trajet in trajets_sexe %}
+                <tr>
+                    <td>{{ trajet.sexe }}</td>
+                    <td>{{ trajet.nb_trajets }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de trajets
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <br><br>
+
+    <h4>Note des conducteurs avec leur nombre de trajets</h4>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Conducteur</th><th>Nombre de trajets</th><th>Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if trajets_note | length >=1 %}
+            {% for trajet in trajets_note %}
+                <tr>
+                    <td>{{ trajet.Conducteur }}</td>
+                    <td>{{ trajet.nb_trajets }}</td>
+                    <td>{{ trajet.note_conducteur }}/5</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de trajets
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <br><br>
+
+    <h4>Distance moyenne conduite par les conducteurs</h4>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Conducteur</th><th>Distance conduite</th><th>Nombre de trajets</th><th>Distance moyenne par trajet</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if trajets_distance | length >=1 %}
+            {% for trajet in trajets_distance %}
+                <tr>
+                    <td>{{ trajet.conducteur }}</td>
+                    <td>{{ trajet.total_distance_conduite }}</td>
+                    <td>{{ trajet.nb_trajets }}</td>
+                    <td>{{ trajet.distance_moyenne }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de trajets
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

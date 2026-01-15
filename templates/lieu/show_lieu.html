@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les lieux</title>
+{% endblock %}
+
+{% block body %}
+    <h3>Lieux</h3>
+    <a class="btn btn-success" href="/lieu/add">Ajouter un lieu</a>
+    <a class="btn btn-success" href="/lieu/etat">Etat des lieux</a>
+    <br><br>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>id</th><th>nom</th><th>adresse</th><th>altitude (en mètres)</th><th>capacité de parking</th><th>cout du stationnement</th><th>places PMR</th><th>ville</th><th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if lieux | length >= 1 %}
+            {% for ligne in lieux %}
+                <tr>
+                    <td>{{ ligne.id }}</td>
+                    <td>{{ ligne.nom }}</td>
+                    <td>{{ ligne.adresse }}</td>
+                    <td>{{ ligne.altitude }}</td>
+                    <td>{{ ligne.capaciteParking }}</td>
+                    <td>{{ ligne.cout_stationnement }}</td>
+                    <td>{{ ligne.place_PMR }}</td>
+                    <td>{{ ligne.ville}}</td>
+                    <td>
+                        <a class="btn btn-warning" href="/lieu/edit?id={{ ligne.id }}">Editer</a>&nbsp;
+                        <a class="btn btn-danger" href="/lieu/delete?id={{ ligne.id }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    pas de lieu
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
